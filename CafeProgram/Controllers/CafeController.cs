@@ -73,25 +73,31 @@ namespace CafeProgram.Controllers
             switch (urunSecimi.Kategori)
             {
                 case "Yiyecekler":
-                    return RedirectToAction("Tatlı");
+                    return RedirectToAction("tatlı");
                
                 case "Tatlılar":
-                    return RedirectToAction("İcecekler");
+                    return RedirectToAction("icecek");
                
-                case "İcecekler":
-                    return RedirectToAction("Hesapla");
+                case "Icecekler":
+                    return RedirectToAction("hesapla");
                 
             }
             return BadRequest();
         }
 
-        public void Hesapla()
+        public IActionResult Hesapla()
         {
+            List<UrunSecimi> urunsecimleri = new();
             foreach (string kategori in HttpContext.Session.Keys)
             {
                 List<Urun> urunler = JsonConvert.DeserializeObject<List<Urun>>(HttpContext.Session.GetString(kategori));
+                urunsecimleri.Add(new()
+                {
+                    Kategori = kategori,
+                    Urunler = urunler
+                });
             }
-            
+            return View(urunsecimleri);
         }
 
 

@@ -1,16 +1,33 @@
-﻿@model List<Urun>
+﻿@model List<UrunSecimi>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-<table>
-    <tr>
-        <th>Hesaplar</th>
-    </tr>
-    @for (int i = 0; i <Model.Count; i++)
-    {
-        <tr>
-            <td>
-                @Model
-            </td>
-        </tr>
-    }
+<h3>Hesaplama</h3>
+<form asp-action="Hesapla" asp-controller="Cafe" method="post">
     
-</table>
+    <table>
+        <tr><th></th>
+            <th>Kategori</th>
+            <th>Name </th>
+            <th>Value</th>
+      
+        </tr>
+ @for (int i = 0; i <Model.Count; i++)
+ {
+     @for (int aa = 0; aa < Model[i].Urunler.Count; aa++)
+     {
+         @if (Model[i].Urunler[aa].SeciliMi)
+         {
+           <tr>
+               <td>
+               <input type="number" asp-for="@Model[i].Urunler[aa].UrunId" hidden />
+               </td>
+                  <td>@Model[i].Kategori</td>
+                       <td><input type="text" asp-for="@Model[i].Urunler[aa].UrunIsmi" hidden/>@Model[i].Urunler[aa].UrunIsmi</td>
+                             <td><input type="number" asp-for="@Model[i].Urunler[aa].UrunFiyat" hidden />@Model[i].Urunler[i].UrunFiyat</td>
+               
+           </tr>
+         }
+     }
+
+    }
+    </table>
+</form>
