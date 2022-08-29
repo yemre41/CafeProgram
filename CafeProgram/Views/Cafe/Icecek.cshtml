@@ -2,7 +2,6 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <h3>UrunSecimi.Kategori</h3>
 <form asp-action="UrunSec" asp-controller="Cafe" method="post">
-    <input type="text" asp-for="@Model.Kategori" hidden/>
     <table>
         <tr>
             <th>Name </th>
@@ -13,8 +12,8 @@
             <tr>
                 <td>
                     <label>
-                        <input type="number" asp-for="@Model.Urunler[i].UrunId" hidden/>
-                        <input type="checkbox" asp-for="@Model.Urunler[i].SeciliMi"/>
+                        <input type="number" asp-for="@Model.Urunler[i].UrunId" hidden />
+                        <input type="checkbox" asp-for="@Model.Urunler[i].SeciliMi" />
                         @Model.Urunler[i].UrunIsmi
                     </label>
                 </td>
@@ -22,8 +21,8 @@
             </tr>
 
         }
-
-    </table>
     <button type="Submit">Kaydet</button>
+    </table>
+    
     <button type="submit" asp-action="Hesapla" asp-controller="Cafe">Hesapla</button>
 </form>
